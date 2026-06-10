@@ -913,60 +913,7 @@ p { margin: 0; }
   background: linear-gradient(90deg, #2dd4bf, #0d9488);
 }
 
-.risk-bars {
-  align-items: end;
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  height: 200px;
-  padding-top: 20px;
-}
-
-.risk-bars div {
-  align-items: center;
-  background: var(--grad-emerald);
-  border-radius: 10px 10px 4px 4px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 16px -6px rgba(16, 185, 129, 0.45);
-  color: white;
-  display: grid;
-  justify-items: center;
-  min-height: 38px;
-  padding: 10px 4px;
-  position: relative;
-  transition: transform 220ms var(--ease);
-}
-
-.risk-bars div:hover { transform: translateY(-3px); }
-
-.risk-bars .warn {
-  background: linear-gradient(180deg, #fbbf24, #d97706);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(217, 119, 6, 0.45);
-}
-
-.risk-bars .field {
-  background: linear-gradient(180deg, #2dd4bf, #0d9488);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(13, 148, 136, 0.45);
-}
-
-.risk-bars .bad {
-  background: linear-gradient(180deg, #fb7185, #e11d48);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(225, 29, 72, 0.45);
-}
-
-.risk-bars span {
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  opacity: 0.9;
-  text-transform: uppercase;
-}
-
-.risk-bars strong {
-  font-size: 22px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
+/* Risk Mix bars defined further down with .risk-col children */
 
 .quick-panel {
   display: grid;
@@ -1731,13 +1678,701 @@ dd {
 .empty-state strong { color: var(--ink); font-family: var(--font-display); font-size: 17px; }
 
 /* ============================================================
+   New Panel Headers + Hints
+   ============================================================ */
+
+.panel-head {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.panel-head-left {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.panel-head-icon {
+  align-items: center;
+  background: linear-gradient(135deg, var(--emerald-50), #d1fae5);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  border-radius: 8px;
+  color: var(--emerald-700);
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  width: 30px;
+}
+
+.panel-head h2 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.panel-head-hint {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.live-dot {
+  background: var(--emerald-500);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
+  display: inline-block;
+  height: 8px;
+  margin-left: 4px;
+  width: 8px;
+  animation: pulse 2.4s var(--ease) infinite;
+}
+
+/* ============================================================
+   Hero Subtitle + Sparkline in Console
+   ============================================================ */
+
+.hero-sub {
+  color: rgba(214, 230, 224, 0.85);
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 580px;
+}
+
+.hero-spark {
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* ============================================================
+   Metric delta
+   ============================================================ */
+
+.metric-delta {
+  background: linear-gradient(135deg, var(--emerald-50), #d1fae5);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 999px;
+  color: var(--emerald-700);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 2px 8px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+/* ============================================================
+   Risk Mix (fixed)
+   ============================================================ */
+
+.risk-chart {
+  padding-top: 8px;
+}
+
+.risk-bars {
+  align-items: end;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  height: 200px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.risk-col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.risk-val {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.risk-bar {
+  background: var(--grad-emerald);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(16, 185, 129, 0.45);
+  min-height: 14px;
+  position: relative;
+  transition: transform 220ms var(--ease);
+  width: 100%;
+  max-width: 64px;
+}
+
+.risk-bar:hover { transform: scaleY(1.04); }
+
+.risk-bar.good { background: var(--grad-emerald); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(16, 185, 129, 0.45); }
+.risk-bar.warn { background: linear-gradient(180deg, #fbbf24, #d97706); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(217, 119, 6, 0.45); }
+.risk-bar.field { background: linear-gradient(180deg, #2dd4bf, #0d9488); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(13, 148, 136, 0.45); }
+.risk-bar.bad { background: linear-gradient(180deg, #fb7185, #e11d48); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 6px 16px -6px rgba(225, 29, 72, 0.45); }
+
+.risk-col small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-top: 12px;
+  position: absolute;
+  bottom: -22px;
+  text-transform: uppercase;
+}
+
+.risk-empty {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  padding: 36px 20px;
+  text-align: center;
+}
+
+.risk-empty svg { color: var(--emerald-600); }
+.risk-empty strong { color: var(--ink); font-family: var(--font-display); font-size: 15px; }
+.risk-empty span { font-size: 13px; }
+
+/* ============================================================
+   Ops Grid variants
+   ============================================================ */
+
+.ops-grid-2 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr 1.1fr;
+}
+
+.ops-grid-3 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ============================================================
+   Distribution Bars
+   ============================================================ */
+
+.dist-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.dist-row {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 90px 1fr 40px;
+}
+
+.dist-name {
+  color: var(--ink-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dist-track {
+  background: var(--slate-100);
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.dist-fill {
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  transition: width 600ms var(--ease);
+  position: relative;
+}
+
+.dist-fill.good { background: var(--grad-emerald); }
+.dist-fill.teal { background: linear-gradient(90deg, #2dd4bf, #0d9488); }
+.dist-fill.amber { background: linear-gradient(90deg, #fbbf24, #d97706); }
+
+.dist-val {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: right;
+}
+
+/* ============================================================
+   Stacked Bar
+   ============================================================ */
+
+.stacked-bar {
+  background: var(--slate-100);
+  border-radius: 999px;
+  display: flex;
+  height: 26px;
+  margin: 14px 0;
+  overflow: hidden;
+}
+
+.stacked-seg {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: -0.01em;
+  transition: filter 200ms var(--ease);
+}
+
+.stacked-seg:hover { filter: brightness(1.08); }
+
+.stacked-seg.good { background: var(--grad-emerald); }
+.stacked-seg.warn { background: linear-gradient(90deg, #fbbf24, #d97706); }
+.stacked-seg.field { background: linear-gradient(90deg, #2dd4bf, #0d9488); }
+.stacked-seg.bad { background: linear-gradient(90deg, #fb7185, #e11d48); }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.legend-dot {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+.legend-dot .dot {
+  border-radius: 999px;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+}
+
+.legend-dot .dot.good { background: var(--grad-emerald); }
+.legend-dot .dot.warn { background: linear-gradient(135deg, #fbbf24, #d97706); }
+.legend-dot .dot.field { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.legend-dot .dot.bad { background: linear-gradient(135deg, #fb7185, #e11d48); }
+
+.legend small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Score Dial
+   ============================================================ */
+
+.score-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.score-dial {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.score-num {
+  position: absolute;
+  text-align: center;
+}
+
+.score-num strong {
+  color: var(--ink);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.score-num span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.score-meta {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+.score-meta div {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px;
+  text-align: center;
+}
+
+.score-meta span {
+  color: var(--muted);
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.score-meta strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.score-foot {
+  font-size: 12.5px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   Histogram
+   ============================================================ */
+
+.histogram {
+  align-items: end;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  height: 200px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.histo-col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.histo-bar {
+  background: var(--grad-emerald);
+  border-radius: 6px 6px 2px 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  min-height: 4px;
+  padding-top: 4px;
+  width: 100%;
+  transition: transform 200ms var(--ease);
+}
+
+.histo-bar:hover { transform: scaleY(1.04); }
+
+.histo-bar span {
+  color: white;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.histo-col small {
+  color: var(--muted);
+  font-size: 9.5px;
+  font-weight: 600;
+  margin-top: 6px;
+  position: absolute;
+  bottom: -18px;
+}
+
+/* ============================================================
+   Sparkline
+   ============================================================ */
+
+.sparkline { display: block; }
+.sparkline.lg { margin-top: 10px; }
+
+/* ============================================================
+   Activity Feed
+   ============================================================ */
+
+.activity-panel { min-height: 280px; }
+
+.activity-list {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.activity-list li {
+  align-items: flex-start;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 18px 1fr;
+  padding: 10px 0;
+  position: relative;
+}
+
+.activity-list li:not(:last-child)::before {
+  background: var(--line);
+  bottom: 0;
+  content: "";
+  left: 8px;
+  position: absolute;
+  top: 26px;
+  width: 1px;
+}
+
+.activity-bullet {
+  background: var(--grad-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+  height: 10px;
+  margin-top: 6px;
+  width: 10px;
+}
+
+.activity-list strong {
+  color: var(--ink);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.activity-list p {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+  margin: 2px 0 2px;
+}
+
+.activity-list small {
+  color: var(--muted-2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Health Strip
+   ============================================================ */
+
+.health-strip {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.health-tile {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+
+.health-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+.health-icon {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.health-tile.good .health-icon { background: linear-gradient(135deg, var(--emerald-50), #d1fae5); color: var(--emerald-700); }
+.health-tile.warn .health-icon { background: linear-gradient(135deg, #fef3c7, #fde68a); color: var(--amber-600); }
+.health-tile.bad .health-icon { background: linear-gradient(135deg, #ffe4e6, #fecdd3); color: var(--rose-600); }
+.health-tile.muted .health-icon { background: var(--slate-100); color: var(--slate-600); }
+
+.health-tile small {
+  color: var(--muted);
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.health-tile strong {
+  color: var(--ink);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Quick card arrow
+   ============================================================ */
+
+.quick-card { position: relative; padding-right: 32px; }
+
+.quick-arrow {
+  color: var(--emerald-600);
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 200ms var(--ease);
+}
+
+.quick-card:hover .quick-arrow { transform: translateY(-50%) translate(2px, -2px); }
+
+/* ============================================================
+   Empty chart
+   ============================================================ */
+
+.empty-chart {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  min-height: 180px;
+  padding: 24px;
+  text-align: center;
+}
+
+.empty-chart svg { color: var(--emerald-600); opacity: 0.6; }
+.empty-chart span { font-size: 13px; font-weight: 500; }
+
+/* ============================================================
+   SLA Items
+   ============================================================ */
+
+.sla-item {
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 12px 14px;
+}
+
+.sla-item strong {
+  color: var(--ink);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sla-item span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sla-dot {
+  border-radius: 999px;
+  height: 10px;
+  width: 10px;
+}
+
+.sla-dot.good { background: var(--emerald-500); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18); }
+.sla-dot.warn { background: var(--amber-500); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18); }
+.sla-dot.bad { background: var(--rose-500); box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.18); }
+
+/* ============================================================
+   Formula card
+   ============================================================ */
+
+.formula-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.formula-grid > div {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+}
+
+.formula-grid span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.formula-grid strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Metric position context for delta
+   ============================================================ */
+
+.metric { position: relative; }
+
+/* ============================================================
    Responsive
    ============================================================ */
 
 @media (max-width: 1280px) {
   .pipeline-board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .ops-grid { grid-template-columns: 1fr 1fr; }
-  .ops-grid > :last-child { grid-column: 1 / -1; }
+  .ops-grid, .ops-grid-2 { grid-template-columns: 1fr 1fr; }
+  .ops-grid > :last-child, .ops-grid-2 > :last-child { grid-column: 1 / -1; }
+  .ops-grid-3 { grid-template-columns: 1fr 1fr; }
+  .health-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .formula-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1180px) {
@@ -1766,10 +2401,14 @@ dd {
   .route-summary,
   .pipeline-board,
   .ops-grid,
+  .ops-grid-2,
+  .ops-grid-3,
   .vehicle-grid,
   .template-grid,
   .agent-grid,
   .kanban,
+  .health-strip,
+  .formula-grid,
   .settings-grid,
   .record-grid,
   .checklist {
