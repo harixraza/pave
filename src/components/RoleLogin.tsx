@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ShieldCheck, UserRoundCheck } from "lucide-react";
+import { ArrowRight, Bot, CheckCircle2, MapPin, ShieldCheck, Sparkles, UserRoundCheck, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { initializeState, setRole } from "@/lib/store";
 import { useEffect } from "react";
@@ -47,9 +47,68 @@ export function RoleLogin() {
             <ArrowRight size={20} />
           </button>
         </div>
+        <p className="login-foot">
+          <Sparkles size={14} />
+          <span>Prototype build — data stays in your browser</span>
+        </p>
       </section>
+
       <section className="login-visual" aria-label="PAVE electric vehicle program">
-        <img src="https://pave.gov.pk/landing/img/hero-section2.png" alt="" />
+        <div className="visual-mesh" aria-hidden="true">
+          <div className="orb orb-1" />
+          <div className="orb orb-2" />
+          <div className="orb orb-3" />
+          <div className="grid-overlay" />
+        </div>
+
+        <div className="visual-frame">
+          <div className="visual-eyebrow">
+            <span className="pulse-dot" />
+            PAVE Program · Live
+          </div>
+
+          <h2 className="visual-headline">
+            Verifying <span className="grad-text">1.3M+ EV</span> applicants across Pakistan.
+          </h2>
+
+          <p className="visual-sub">
+            AI-driven intake, stratified sampling, and video verification — built for the 95% confidence target.
+          </p>
+
+          <div className="visual-stats">
+            <div className="stat-card">
+              <div className="stat-icon"><Zap size={18} /></div>
+              <strong>1,314,726</strong>
+              <span>Applicant population</span>
+            </div>
+            <div className="stat-card">
+              <div className="stat-icon"><CheckCircle2 size={18} /></div>
+              <strong>65,736</strong>
+              <span>Sample target · 95%</span>
+            </div>
+            <div className="stat-card">
+              <div className="stat-icon"><MapPin size={18} /></div>
+              <strong>7</strong>
+              <span>Provinces covered</span>
+            </div>
+            <div className="stat-card">
+              <div className="stat-icon"><Bot size={18} /></div>
+              <strong>7-pt</strong>
+              <span>RFP checklist</span>
+            </div>
+          </div>
+
+          <div className="visual-marquee" aria-hidden="true">
+            <div className="marquee-track">
+              {["Yadea", "E-Turbo", "Road Prince", "United", "Metro", "Jolta", "OKLA", "Zongshen", "EcoDost"].map((oem) => (
+                <span key={oem}>{oem}</span>
+              ))}
+              {["Yadea", "E-Turbo", "Road Prince", "United", "Metro", "Jolta", "OKLA", "Zongshen", "EcoDost"].map((oem) => (
+                <span key={`${oem}-dup`}>{oem}</span>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );
